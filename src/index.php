@@ -119,15 +119,15 @@ function checkBorderVar($borderWidth)
 function hexStringToRGB($hexString)
 {
     if (strlen($hexString) == 3) {
-        $r = hexdec(substr($hexString, 0, 1) . substr($hexString, 0, 1));
-        $g = hexdec(substr($hexString, 1, 1) . substr($hexString, 1, 1));
-        $b = hexdec(substr($hexString, 2, 1) . substr($hexString, 2, 1));
+        $red = hexdec(substr($hexString, 0, 1) . substr($hexString, 0, 1));
+        $green = hexdec(substr($hexString, 1, 1) . substr($hexString, 1, 1));
+        $blue = hexdec(substr($hexString, 2, 1) . substr($hexString, 2, 1));
     } else {
-        $r = hexdec(substr($hexString, 0, 2));
-        $g = hexdec(substr($hexString, 2, 2));
-        $b = hexdec(substr($hexString, 4, 2));
+        $red = hexdec(substr($hexString, 0, 2));
+        $green = hexdec(substr($hexString, 2, 2));
+        $blue = hexdec(substr($hexString, 4, 2));
     }
-    $rgb = array($r, $g, $b);
+    $rgb = array($red, $green, $blue);
     return $rgb;
 }
 
