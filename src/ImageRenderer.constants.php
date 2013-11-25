@@ -23,6 +23,12 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
+/**
+ * Constants used within the ImageRenderer Class, these are used as the defaults, in case the
+ * setting of the class fields used to render the image fail due to not being valid.
+ */
+
 define("DEFAULT_WIDTH", 300);
 define("DEFAULT_HEIGHT", DEFAULT_WIDTH);
 define("DEFAULT_BORDER", 4);
@@ -31,5 +37,6 @@ define("DELIMITER", ",");
 define("RGB_COUNT", 3);
 define("HEX_LENGTH", 6);
 define("CONTENT_TYPE", "Content-type: image/png");
+define("SHOW_BORDER", false);
 
 ?>

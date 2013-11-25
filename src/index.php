@@ -23,124 +23,32 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 
-require_once "constants.php";
+require_once "ImageRenderer.class.php";
 
-// Code Start
-
+/**
+ * Grab the variables passed to the script
+ */
 $height = $_GET['x'];
 $width = $_GET['y'];
 $border = (bool)$_GET['border'];
 $borderWidth = $_GET['thick'];
 $colour = $_GET['background'];
 
-$coloursRGB = null;
-
-if (!empty($colour)) {
-    if (strlen($colour) == HEX_LENGTH) {
-        $coloursRGB = hexStringToRGB($colour);
-    } else {
-        if (strpos($colour, DELIMITER)) {
-            $coloursRGB = explode(DELIMITER, $colour);
-            if (count($coloursRGB) != RGB_COUNT) {
-                $coloursRGB = defaultRGB();
-            }
-        } else {
-            $coloursRGB = defaultRGB();
-        }
-    }
-} else {
-    $coloursRGB = defaultRGB();
-}
-
-if (empty($height) || !is_numeric($height)) {
-    $height = DEFAULT_HEIGHT;
-}
-
-if (empty($width) || !is_numeric($width)) {
-    $width = DEFAULT_WIDTH;
-}
-
-$borderWidth = checkBorderVar($borderWidth);
-if (!is_bool($border)) {
-    $border = false;
-} else {
-    if ($border) {
-        if (empty($borderWidth) || !is_numeric($borderWidth)) {
-            $borderWidth = checkBorderVar(DEFAULT_BORDER);
-        }
-    }
-}
-
-$image = imagecreate($width, $height);
-$background = imagecolorallocate($image, $coloursRGB[0], $coloursRGB[1], $coloursRGB[2]);
-
-
-if ($border) {
-    $borderImage = ImageFilledRectangle($image, 0, 0, 0, 0, 000);
-    imagesetthickness($image, $borderWidth);
-    imagerectangle($image, 0, 0, ImageSX($image), ImageSY($image), $borderImage);
-}
-
-// set HTML Header
-
-header(CONTENT_TYPE);
-
-// Create the image
-imagepng($image);
-
-// destroy the image
-imagedestroy($image);
-
-
-// Functions
-
 /**
- * Method to set the Boarder with var on error
+ * Create an instance of the ImageRenderer
+ * set the dimensions of the image
+ * set the fill colour for the image
+ * set the border information
+ * render the image to the view
  *
- * @param $borderWidth
- * @return int
+ * If only the defaults are required then just instantiate ImageRenderer,
+ * then call the render() method. All the defaults within
+ * ImageRenderer.constants.php will be used.
  */
-function checkBorderVar($borderWidth)
-{
-    if (empty($borderWidth) || !is_numeric($borderWidth)) {
-        $borderWidth = 0;
-        return $borderWidth;
-    }
-    return $borderWidth;
-}
-
-/**
- *
- * Function to turn hexString #FFFFFF into an RGB array
- *
- * @param $hexString
- * @return array
- */
-function hexStringToRGB($hexString)
-{
-    if (strlen($hexString) == 3) {
-        $red = hexdec(substr($hexString, 0, 1) . substr($hexString, 0, 1));
-        $green = hexdec(substr($hexString, 1, 1) . substr($hexString, 1, 1));
-        $blue = hexdec(substr($hexString, 2, 1) . substr($hexString, 2, 1));
-    } else {
-        $red = hexdec(substr($hexString, 0, 2));
-        $green = hexdec(substr($hexString, 2, 2));
-        $blue = hexdec(substr($hexString, 4, 2));
-    }
-    $rgb = array($red, $green, $blue);
-    return $rgb;
-}
-
-/**
- *
- * Method to set the default RGB if failed.
- *
- * @return array
- */
-function defaultRGB()
-{
-    $coloursRGB = hexStringToRGB(DEFAULT_FILL);
-    return $coloursRGB;
-}
+$imageObject = new ImageRenderer();
+$imageObject->setDimensions($height,$width);
+$imageObject->setColour($colour);
+$imageObject->setBorder($border,$borderWidth);
+$imageObject->render();
 
 ?>
