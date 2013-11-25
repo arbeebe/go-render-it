@@ -23,20 +23,41 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 
+require_once "constants.php";
+
 // Code Start
 
 $height = $_GET['x'];
 $width = $_GET['y'];
 $border = (bool)$_GET['border'];
 $borderWidth = $_GET['thick'];
+$colour = $_GET['background'];
 
+$coloursRGB = null;
+
+if (!empty($colour)) {
+    if (strlen($colour) == HEX_LENGTH) {
+        $coloursRGB = hexStringToRGB($colour);
+    } else {
+        if (strpos($colour, DELIMITER)) {
+            $coloursRGB = explode(DELIMITER, $colour);
+            if (count($coloursRGB) != RGB_COUNT) {
+                $coloursRGB = defaultRGB();
+            }
+        } else {
+            $coloursRGB = defaultRGB();
+        }
+    }
+} else {
+    $coloursRGB = defaultRGB();
+}
 
 if (empty($height) || !is_numeric($height)) {
-    $height = 300;
+    $height = DEFAULT_HEIGHT;
 }
 
 if (empty($width) || !is_numeric($width)) {
-    $width = 300;
+    $width = DEFAULT_WIDTH;
 }
 
 $borderWidth = checkBorderVar($borderWidth);
@@ -45,13 +66,13 @@ if (!is_bool($border)) {
 } else {
     if ($border) {
         if (empty($borderWidth) || !is_numeric($borderWidth)) {
-            $borderWidth = checkBorderVar(4);
+            $borderWidth = checkBorderVar(DEFAULT_BORDER);
         }
     }
 }
 
 $image = imagecreate($width, $height);
-$background = imagecolorallocate($image, 311, 123, 321);
+$background = imagecolorallocate($image, $coloursRGB[0], $coloursRGB[1], $coloursRGB[2]);
 
 
 if ($border) {
@@ -62,7 +83,7 @@ if ($border) {
 
 // set HTML Header
 
-header("Content-type: image/png");
+header(CONTENT_TYPE);
 
 // Create the image
 imagepng($image);
@@ -74,6 +95,8 @@ imagedestroy($image);
 // Functions
 
 /**
+ * Method to set the Boarder with var on error
+ *
  * @param $borderWidth
  * @return int
  */
@@ -84,6 +107,40 @@ function checkBorderVar($borderWidth)
         return $borderWidth;
     }
     return $borderWidth;
+}
+
+/**
+ *
+ * Function to turn hexString #FFFFFF into an RGB array
+ *
+ * @param $hexString
+ * @return array
+ */
+function hexStringToRGB($hexString)
+{
+    if (strlen($hexString) == 3) {
+        $r = hexdec(substr($hexString, 0, 1) . substr($hexString, 0, 1));
+        $g = hexdec(substr($hexString, 1, 1) . substr($hexString, 1, 1));
+        $b = hexdec(substr($hexString, 2, 1) . substr($hexString, 2, 1));
+    } else {
+        $r = hexdec(substr($hexString, 0, 2));
+        $g = hexdec(substr($hexString, 2, 2));
+        $b = hexdec(substr($hexString, 4, 2));
+    }
+    $rgb = array($r, $g, $b);
+    return $rgb;
+}
+
+/**
+ *
+ * Method to set the default RGB if failed.
+ *
+ * @return array
+ */
+function defaultRGB()
+{
+    $coloursRGB = hexStringToRGB(DEFAULT_FILL);
+    return $coloursRGB;
 }
 
 ?>
