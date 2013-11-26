@@ -33,6 +33,7 @@ $width = $_GET['y'];
 $border = (bool)$_GET['border'];
 $borderWidth = $_GET['thick'];
 $colour = $_GET['background'];
+$label = $_GET['label'];
 
 /**
  * Create an instance of the ImageRenderer
@@ -46,9 +47,14 @@ $colour = $_GET['background'];
  * ImageRenderer.constants.php will be used.
  */
 $imageObject = new ImageRenderer();
-$imageObject->setDimensions($height,$width);
+$imageObject->setDimensions($height, $width);
 $imageObject->setColour($colour);
-$imageObject->setBorder($border,$borderWidth);
+$imageObject->setBorder($border, $borderWidth);
+
+if (!empty($label)) {
+    $imageObject->setTextString($label);
+}
+
 $imageObject->render();
 
 ?>
