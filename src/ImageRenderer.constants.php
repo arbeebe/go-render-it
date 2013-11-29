@@ -38,7 +38,7 @@ define("RGB_COUNT", 3);
 define("HEX_LENGTH", 6);
 define("CONTENT_TYPE", "Content-type: image/png");
 define("SHOW_BORDER", false);
-define("FONT_PATH",'fonts/bluecond.ttf');
+define("FONT_PATH",'fonts/monofont.ttf');
 define("SHOW_LABEL",true);
 
 ?>
