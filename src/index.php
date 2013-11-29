@@ -28,7 +28,8 @@ require_once "ImageRenderer.class.php";
 /**
  * Grab the variables passed to the script
  */
-$height = $_GET['x'];
+
+$height = $_GET['q'];
 $width = $_GET['y'];
 $border = (bool)$_GET['border'];
 $borderWidth = $_GET['thick'];
