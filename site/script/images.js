@@ -22,6 +22,7 @@ $(document).ready(function () {
         $(this).css("background-color", "#DCDADA");
         $(this).css("color","#FFFFFF");
         $(divNam).fadeOut("fast", function () {
+            $("#rightContent").children().hide();
             $("#imageContainer").fadeIn("fast", function () {
             });
         });
