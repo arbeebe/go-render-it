@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
 
     $("li").click(function () {
-
+        $("#rightContent").children().hide();
         divNam = "#" + $(this).attr("id") + "-div";
         $("#imageContainer").fadeOut("fast", function () {
 
