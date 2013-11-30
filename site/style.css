@@ -1,0 +1,198 @@
+body, html {
+    margin: 0;
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: #EEEEEE;
+    padding: 0;
+}
+
+#pageWrapper {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+}
+
+#header {
+    padding: 20px;
+    height: 100px;
+    background-color: #0075B2;
+}
+
+#header img{
+    float:left;
+    width: 100px;
+}
+#header h1 {
+    float:left;
+    margin-left: 20px;
+    color: #FFFFFF;
+}
+
+#header h4 {
+    float:left;
+    position: relative;
+    top:40px;
+    left:-203px;
+    color: #FDA432;
+}
+
+#content {
+    position: relative;
+    overflow: visible;
+    min-height: 400px;
+}
+
+#leftContent {
+    float: left;
+    width: 390px;
+    min-height: 200px;
+    padding-top: 10px;
+    padding-left: 10px;
+    text-align: justify;
+}
+
+#rightContent {
+    float: left;
+    width: 400px;
+}
+
+#imageContainer {
+    position: relative;
+    left: 20px;
+    margin: 20px 0 10px 0;
+}
+
+#rightContent img {
+    float: left;
+    margin: 5px;
+}
+
+#footer {
+    text-align: center;
+    height: 60px;
+    width: 800px;
+    background-color: #0075B2;
+}
+
+#footer img {
+    margin-top: 6px;
+    margin-bottom: 10px;
+    max-height: 48px;
+}
+
+.link {
+    border: gray dashed thin;
+    padding: 20px 10px 20px 10px;
+    text-align: center;
+}
+
+.link a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bolder;
+}
+
+.link a:hover {
+    color: #FDA432;
+}
+
+.rule {
+    width: 70%;
+    height: 3px;
+    background-color: #FDA432;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    top: -4px;
+}
+
+#options {
+    position: relative;
+    overflow: auto;
+}
+
+#otherOptions {
+    padding-top: 15px;
+    padding-left: 10px;
+    width: 50%;
+    float: left;
+    color: #00A7FF;
+}
+
+#buttons ul {
+    position: relative;
+    left: 15px;
+    list-style: none;
+}
+
+#buttons ul li {
+    float: left;
+    width: 105px;
+    height: 30px;
+    background-color: #DCDADA;
+    text-align: center;
+    margin-right: 17px;
+    padding-top: 10px;
+
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+#otherOptions h4 {
+    position: relative;
+    top: -10px;
+}
+
+#colour-div, #text-div, #size-div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+    display: none;
+    border-left: #FDA432 solid 3px;
+    height: 355px;
+    padding-left: 10px;
+    margin-top: 30px;
+    text-align: justify;
+}
+
+h3 {
+    color: #00A7FF;
+}
+
+#mainLink {
+    position: absolute;
+    bottom: 17px;
+    width: 400px;
+}
+
+.rightLink {
+    font-size: small;
+    border: gray dashed thin;
+    padding: 10px;
+    text-align: center;
+    clear: both;
+}
+
+.rightLink a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bolder;
+}
+
+.rightLink a:hover {
+    color: #FDA432;
+}
+
+.rightLinkImg {
+    position: relative;
+    left:-6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.center{
+    position: relative;
+    left:20px;
+}

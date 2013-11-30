@@ -23,7 +23,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once "ImageRenderer.constants.php";
+require_once "constants/ImageRenderer.constants.php";
 
 /**
  * Class ImageRenderer will render an image from passed
@@ -46,7 +46,7 @@ class ImageRenderer
      */
     function __construct()
     {
-        $this->textString = DEFAULT_HEIGHT . " x " . DEFAULT_WIDTH;
+        $this->textString = DEFAULT_HEIGHT . SIZE_JOINER . DEFAULT_WIDTH;
     }
 
     /**
@@ -144,7 +144,7 @@ class ImageRenderer
             if (!empty($width) && is_numeric($width)) {
                 $this->width = $width;
                 $this->height = $height;
-                $this->textString = $height . " x " . $width;
+                $this->textString = $width . SIZE_JOINER . $height;
             }
         }
 

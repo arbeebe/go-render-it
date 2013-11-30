@@ -22,39 +22,10 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+require_once "ImageRequestHandler.class.php";
 
-require_once "ImageRenderer.class.php";
-
-/**
- * Grab the variables passed to the script
- */
-$height = $_GET['x'];
-$width = $_GET['y'];
-$border = (bool)$_GET['border'];
-$borderWidth = $_GET['thick'];
-$colour = $_GET['background'];
-$label = $_GET['label'];
-
-/**
- * Create an instance of the ImageRenderer
- * set the dimensions of the image
- * set the fill colour for the image
- * set the border information
- * render the image to the view
- *
- * If only the defaults are required then just instantiate ImageRenderer,
- * then call the render() method. All the defaults within
- * ImageRenderer.constants.php will be used.
- */
-$imageObject = new ImageRenderer();
-$imageObject->setDimensions($height, $width);
-$imageObject->setColour($colour);
-$imageObject->setBorder($border, $borderWidth);
-
-if (!empty($label)) {
-    $imageObject->setTextString($label);
-}
-
-$imageObject->render();
+$imageRequestObject = new ImageRequestHandler();
+$imageRequestObject->setRequestString($_GET[GET_PARAM]);
+$imageRequestObject->render();
 
 ?>

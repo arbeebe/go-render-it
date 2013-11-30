@@ -38,7 +38,14 @@ define("RGB_COUNT", 3);
 define("HEX_LENGTH", 6);
 define("CONTENT_TYPE", "Content-type: image/png");
 define("SHOW_BORDER", false);
-define("FONT_PATH",'fonts/monofont.ttf');
-define("SHOW_LABEL",true);
+define("FONT_PATH", 'fonts/monofont.ttf');
+define("SHOW_LABEL", true);
+
+define("URL_DELIMITER", "/");
+define("LABEL_ID", ':');
+define("EMPTY_STRING", "");
+
+define("SIZE_JOINER","x");
+define("GET_PARAM",'url');
 
 ?>
