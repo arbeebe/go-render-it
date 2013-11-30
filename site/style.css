@@ -10,6 +10,7 @@ body, html {
     margin-left: auto;
     margin-right: auto;
     background-color: #FFFFFF;
+    overflow: hidden;
 }
 
 #header {
@@ -38,7 +39,7 @@ body, html {
 
 #content {
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     min-height: 400px;
 }
 
@@ -117,6 +118,7 @@ body, html {
     width: 50%;
     float: left;
     color: #00A7FF;
+    overflow: hidden;
 }
 
 #buttons ul {
@@ -155,6 +157,7 @@ body, html {
     padding-left: 10px;
     margin-top: 30px;
     text-align: justify;
+    overflow: hidden;
 }
 
 h3 {
@@ -188,11 +191,11 @@ h3 {
 .rightLinkImg {
     position: relative;
     left:-6px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .center{
     position: relative;
-    left:20px;
+    left:50px;
 }
