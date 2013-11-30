@@ -10,9 +10,9 @@ $(document).ready(function () {
     $("li").click(function () {
 
         divNam = "#" + $(this).attr("id") + "-div";
-        $("#imageContainer").fadeOut("slow", function () {
+        $("#imageContainer").fadeOut("fast", function () {
 
-            $(divNam).fadeIn("slow", function () {
+            $(divNam).fadeIn("fast", function () {
 
             });
         });
@@ -21,8 +21,8 @@ $(document).ready(function () {
     $("li").mouseout(function () {
         $(this).css("background-color", "#DCDADA");
         $(this).css("color","#FFFFFF");
-        $(divNam).fadeOut("slow", function () {
-            $("#imageContainer").fadeIn("slow", function () {
+        $(divNam).fadeOut("fast", function () {
+            $("#imageContainer").fadeIn("fast", function () {
             });
         });
 
