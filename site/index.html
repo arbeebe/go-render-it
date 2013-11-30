@@ -6,7 +6,7 @@
           href="site/images/alien.ico">
 
     <LINK href="/site/style.css" rel="stylesheet" type="text/css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/site/script/jquery.js"></script>
     <script src="/site/script/images.js"></script>
     <title>Go Render It</title>
 </head>
@@ -14,7 +14,8 @@
 
 <div id="pageWrapper">
     <div id="header">
-        <img src="site/images/alien.png"/>
+        <img src="site/images/alien.png" alt="Happy Alien :D"/>
+
         <h1>Go Render It</h1>
         <h4>Simple Placeholder Images</h4>
     </div>
@@ -24,68 +25,63 @@
         <div id="leftContent">
             <h3>What is this?</h3>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit. Fusce a
-                interdum eros. Proin nisi lacus, dapibus eget dolor vel, eleifend porttitor nulla. Duis euismod
-                adipiscing ipsum vel pellentesque. Duis rhoncus gravida augue, ac fermentum ante tempor a.
-                Donec libero libero, pharetra sit amet aliquet placerat, laoreet ac dolor. Fusce vestibulum orci magna,
-                non rutrum elit bibendum vel. Quisque egestas ante ut turpis elementum lobortis</p>
+            <p>When creating a website mock up one of the most tedious tasks to place holder images. The original spec says 250x250 so create an image, then it changes to 150x150 or the colour changes. Then have to open the image editor and this takes time, too much time!</p>
+
+            <p>Go render is a service that renders images for your mock ups, all parameterised and can modified with ease. To use this change your image src to match the example below. There are also options for the colour and labels displayed.</p>
 
             <div id="mainLink">
                 <h3>Use in your image tags like so:</h3>
 
                 <div class="link">
-                    <a target="_blank" href="/300/FDA782">&lt;img src="gorender.it/300/FDA782"/&gt;</a>
+                    <a target="_blank" href="/300/FDA782" title="View what is rendered.">&lt;img src="http://www.gorender.it/300/FDA782"/&gt;</a>
                 </div>
             </div>
         </div>
         <!-- end of leftContent -->
         <div id="rightContent">
             <div id="imageContainer">
-                <img src="/140x250"/>
-                <img src="/200x150"/>
-                <img src="/200x90/FDA432"/>
-                <img src="/350x100"/>
+                <img src="site/images/rendered/140x250.png" alt="Render Example"/>
+                <img src="site/images/rendered/200x150.png" alt="Render Example"/>
+                <img src="site/images/rendered/FDA432.png" alt="Render Example"/>
+                <img src="site/images/rendered/350x100.png" alt="Render Example"/>
             </div>
             <!-- end of imageContainer -->
 
             <div id="colour-div">
                 <h3>Colour Options</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit.
-                    Fusce a
-                    interdum eros.</p>
+                <p>Go Render can take colour parameters in two formats. Either as a HEX value "FDA782" or as a RGB colour string
+                    "245,124,180". Its location within the request does not matter.</p>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/300x150/FDA782">gorender.it/300x150/FDA782</a>
+                    <a target="_blank" href="/300x150/FDA782">http://www.gorender.it/300x50/FDA782</a>
                 </div>
+                <img class="rightLinkImg" src="/site/images/rendered/FDA432-1.png" alt="Render Example"/>
 
-                <img class="rightLinkImg" src="/350x50/FDA432"/>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/245,124,180/300x150">gorender.it/245,124,180/300x150</a>
+                    <a target="_blank" href="/245,124,180/300x150">http://www.gorender.it/245,124,180/300x50</a>
                 </div>
+                <img class="rightLinkImg" src="/site/images/rendered/350x50.png" alt="Render Example" />
 
-                <img class="rightLinkImg" src="245,124,180/350x50"/>
             </div>
 
             <div id="size-div">
                 <h3>Size Options</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit.
-                    Fusce a
-                    interdum eros.</p>
+                <p>The size can be passed in two forms. Its location within the request does not matter.If a single number is passed then a square is rendered. However if "300x150" is passed then the image is rendered to the size.</p>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/150">gorender.it/150</a>
+                    <a target="_blank" href="/125">http://www.gorender.it/125</a>
                 </div>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/150x150">gorender.it/150x150</a>
+                    <a target="_blank" href="/125x125">http://www.gorender.it/125x125</a>
                 </div>
 
                 <div class="center">
-                    <img class="rightLinkImg" src="/150"/>
-                    <img class="rightLinkImg" src="/150x150"/>
+                    <img class="rightLinkImg" src="/site/images/rendered/125.png" alt="Render Example"/>
+                    <img class="rightLinkImg" src="/site/images/rendered/125.png" alt="Render Example"/>
                 </div>
 
             </div>
@@ -93,21 +89,19 @@
             <div id="text-div">
                 <h3>Text Options</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit.
-                    Fusce a
-                    interdum eros.</p>
+                <p>A custom label on the image can be passed as a parameter. Its location within the request does not matter.However the label text must begin with ":" which will be removed when the image is rendered.</p>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/300x150/FDA782">gorender.it/300x150/:My Label</a>
+                    <a target="_blank" href="/300x150/FDA782">http://www.gorender.it/300x50/:My Label</a>
                 </div>
 
-                <img class="rightLinkImg" src="/350x50/:My Label"/>
+                <img class="rightLinkImg" src="/site/images/rendered/My%20Label.png" alt="Render Example"/>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/300x150/FFF">gorender.it/350x50/:Label/FDD432</a>
+                    <a target="_blank" href="/300x150/FFF">http://www.gorender.it/350x50/:Label/FDD432</a>
                 </div>
 
-                <img class="rightLinkImg" src="350x50/:Label/FDD432"/>
+                <img class="rightLinkImg" src="/site/images/rendered/FDD432.png" alt="Render Example"/>
             </div>
         </div>
         <!-- end of rightContent -->
@@ -124,19 +118,19 @@
         <div id="buttons">
             <ul>
                 <li class="button" id="colour">Colour</li>
-                <li class="button" id="size">Size</a></li>
+                <li class="button" id="size">Size</li>
                 <li class="button" id="text">Text</li>
             </ul>
         </div>
     </div>
 
     <div id="footer">
-        <a href="https://github.com/mikulucky/placeholder-renderer" target="_blank"><img
-                src="site/images/github.png"></a>
-        <a href="https://twitter.com/2012_mccarthy" target="_blank"><img
-                src="site/images/twitter.png"></a>
-        <a href="http://uk.linkedin.com/in/josephbmccarthy" target="_blank"><img
-                src="site/images/linkedIn.png"></a>
+        <a href="https://github.com/mikulucky/placeholder-renderer" target="_blank" title="View on GitHub"><img
+                src="site/images/github.png" alt="Git Hub Icon"></a>
+        <a href="https://twitter.com/2012_mccarthy" target="_blank" title="My Twitter Profile"><img
+                src="site/images/twitter.png" alt="Twitter Icon"></a>
+        <a href="http://uk.linkedin.com/in/josephbmccarthy" target="_blank" title="My LinkedIn Profile"><img
+                src="site/images/linkedIn.png" alt="LinkedIn Icon"></a>
     </div>
     <!-- end of content -->
 </div>

@@ -1,6 +1,7 @@
 body, html {
     margin: 0;
     font-family: Tahoma, Geneva, sans-serif;
+    font-size:15px;
     background-color: #EEEEEE;
     padding: 0;
 }
@@ -10,6 +11,7 @@ body, html {
     margin-left: auto;
     margin-right: auto;
     background-color: #FFFFFF;
+    overflow: hidden;
 }
 
 #header {
@@ -32,13 +34,13 @@ body, html {
     float:left;
     position: relative;
     top:40px;
-    left:-203px;
+    left:-194px;
     color: #FDA432;
 }
 
 #content {
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     min-height: 400px;
 }
 
@@ -90,6 +92,7 @@ body, html {
     text-decoration: none;
     color: #000000;
     font-weight: bolder;
+    font-size: 14px;
 }
 
 .link a:hover {
@@ -117,6 +120,7 @@ body, html {
     width: 50%;
     float: left;
     color: #00A7FF;
+    overflow: hidden;
 }
 
 #buttons ul {
@@ -151,10 +155,11 @@ body, html {
     width: 350px;
     display: none;
     border-left: #FDA432 solid 3px;
-    height: 355px;
+    height: 375px;
     padding-left: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
     text-align: justify;
+    overflow: hidden;
 }
 
 h3 {
@@ -188,11 +193,11 @@ h3 {
 .rightLinkImg {
     position: relative;
     left:-6px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .center{
     position: relative;
-    left:20px;
+    left:50px;
 }
