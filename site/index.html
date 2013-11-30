@@ -25,17 +25,15 @@
         <div id="leftContent">
             <h3>What is this?</h3>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit. Fusce a
-                interdum eros. Proin nisi lacus, dapibus eget dolor vel, eleifend porttitor nulla. Duis euismod
-                adipiscing ipsum vel pellentesque. Duis rhoncus gravida augue, ac fermentum ante tempor a.
-                Donec libero libero, pharetra sit amet aliquet placerat, laoreet ac dolor. Fusce vestibulum orci magna,
-                non rutrum elit bibendum vel. Quisque egestas ante ut turpis elementum lobortis</p>
+            <p>When creating a website mock up one of the most tedious tasks to place holder images. The original spec says 250x250 so create an image, then it changes to 150x150 or the colour changes. Then have to open the image editor and this takes time, too much time!</p>
+
+            <p>Go render is a service that renders images for your mock ups, all parameterised and can modified with ease. To use this change your image src to match the example below. There are also options for the colour and labels displayed.</p>
 
             <div id="mainLink">
                 <h3>Use in your image tags like so:</h3>
 
                 <div class="link">
-                    <a target="_blank" href="/300/FDA782">&lt;img src="gorender.it/300/FDA782"/&gt;</a>
+                    <a target="_blank" href="/300/FDA782">&lt;img src="http://www.gorender.it/300/FDA782"/&gt;</a>
                 </div>
             </div>
         </div>
@@ -52,18 +50,17 @@
             <div id="colour-div">
                 <h3>Colour Options</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit.
-                    Fusce a
-                    interdum eros.</p>
+                <p>Go Render can take colour parameters in two formats. Either as a HEX value "FDA782" or as a RGB colour string
+                    "245,124,180". Its location within the request does not matter.</p>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/300x150/FDA782">gorender.it/300x50/FDA782</a>
+                    <a target="_blank" href="/300x150/FDA782">http://www.gorender.it/300x50/FDA782</a>
                 </div>
                 <img class="rightLinkImg" src="/site/images/rendered/FDA432-1.png"/>
 
 
                 <div class="rightLink">
-                    <a target="_blank" href="/245,124,180/300x150">gorender.it/245,124,180/300x50</a>
+                    <a target="_blank" href="/245,124,180/300x150">http://www.gorender.it/245,124,180/300x50</a>
                 </div>
                 <img class="rightLinkImg" src="/site/images/rendered/350x50.png"/>
 
@@ -72,16 +69,14 @@
             <div id="size-div">
                 <h3>Size Options</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit.
-                    Fusce a
-                    interdum eros.</p>
+                <p>The size can be passed in two forms. Its location within the request does not matter.If a single number is passed then a square is rendered. However if "300x150" is passed then the image is rendered to the size.</p>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/125">gorender.it/125</a>
+                    <a target="_blank" href="/125">http://www.gorender.it/125</a>
                 </div>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/125x125">gorender.it/125x125</a>
+                    <a target="_blank" href="/125x125">http://www.gorender.it/125x125</a>
                 </div>
 
                 <div class="center">
@@ -94,18 +89,16 @@
             <div id="text-div">
                 <h3>Text Options</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut scelerisque risus a feugiat suscipit.
-                    Fusce a
-                    interdum eros.</p>
+                <p>A custom label on the image can be passed as a parameter. Its location within the request does not matter.However the label text must begin with ":" which will be removed when the image is rendered.</p>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/300x150/FDA782">gorender.it/300x50/:My Label</a>
+                    <a target="_blank" href="/300x150/FDA782">http://www.gorender.it/300x50/:My Label</a>
                 </div>
 
                 <img class="rightLinkImg" src="/site/images/rendered/My Label.png"/>
 
                 <div class="rightLink">
-                    <a target="_blank" href="/300x150/FFF">gorender.it/350x50/:Label/FDD432</a>
+                    <a target="_blank" href="/300x150/FFF">http://www.gorender.it/350x50/:Label/FDD432</a>
                 </div>
 
                 <img class="rightLinkImg" src="/site/images/rendered/FDD432.png"/>
@@ -125,7 +118,7 @@
         <div id="buttons">
             <ul>
                 <li class="button" id="colour">Colour</li>
-                <li class="button" id="size">Size</a></li>
+                <li class="button" id="size">Size</li>
                 <li class="button" id="text">Text</li>
             </ul>
         </div>
