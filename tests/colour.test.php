@@ -81,6 +81,15 @@ class ColourTest extends PHPUnit_Framework_TestCase
         $colour = new Colour();
         $colourString = "ff9900";
         $colour->setColour($colourString);
-        assert("255,153,0" == $colour->convertToRGB());
+        assert("255,153,000" == $colour->convertToRGB());
+    }
+
+    public function testAll(){
+        $colour = new Colour();
+        $colourString = "ff9900";
+        $colour->setColour($colourString);
+        assert("255,153,000" == $colour->convertToRGB());
+        $colour->convertToHexString();
+        assert($colour->getColour() == $colourString);
     }
 }

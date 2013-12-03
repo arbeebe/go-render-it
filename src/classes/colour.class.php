@@ -8,76 +8,151 @@ class Colour
 
     private $colourRepresentationString = null;
 
+    /**
+     * @param bool $newColourRepresentationString
+     */
     function __construct($newColourRepresentationString = false)
     {
-        $this->colourRepresentationString = $newColourRepresentationString;
+        if (!empty($newColourRepresentationString)) {
+            $this->setColour($newColourRepresentationString);
+        }
     }
 
-    public function isValid()
+    /**
+     * @param $newColourRepresentationString
+     */
+    public function setColour($newColourRepresentationString)
     {
-        return $this->doValidation();
+        if ($this->doValidation($newColourRepresentationString)) {
+            $this->colourRepresentationString = $newColourRepresentationString;
+        } else {
+            $this->notValidColour($newColourRepresentationString);
+        }
+
     }
 
-    private function doValidation()
+    /**
+     * @param bool $newColourRepresentationString
+     * @return bool
+     */
+    private function doValidation($newColourRepresentationString = false)
     {
-        if (preg_match(REGEX_HEX, $this->getColour()) || preg_match(REGEX_RGB, $this->getColour())) {
+        $value = (!empty($newColourRepresentationString)) ? $newColourRepresentationString : $this->getColour();
+        if (preg_match(REGEX_HEX, $value) || preg_match(REGEX_RGB, $value)) {
             return true;
         }
 
         return false;
     }
 
+    /**
+     * @return null
+     */
     public function getColour()
     {
         return $this->colourRepresentationString;
     }
 
+    /**
+     * Method to throw an exception if the colour value is not a valid format.
+     *
+     * @throws InvalidArgumentException
+     */
+    private function notValidColour($newColourRepresentationString = false)
+    {
+        $colour = (!empty($newColourRepresentationString)) ? $newColourRepresentationString : $this->getColour();
+        throw new InvalidArgumentException("Colour {$colour} is not a valid value");
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid()
+    {
+        return $this->doValidation();
+    }
+
+    /**
+     * @return null
+     */
     public function convertToRGB()
     {
         if ($this->doValidation()) {
             if (preg_match(REGEX_RGB, $this->colourRepresentationString)) {
-                return $this->colourRepresentationString;
+                return $this->getColour();
             } else {
                 $this->setColour($this->fromHex());
                 return $this->getColour();
             }
         }
 
-        throw new InvalidArgumentException("Colour {$this->colourRepresentationString} is not a valid value");
+        $this->notValidColour();
     }
 
-    public function setColour($newColourRepresentationString)
-    {
-        $this->colourRepresentationString = $newColourRepresentationString;
-    }
-
+    /**
+     * @return null
+     */
     private function fromHex()
     {
-        $this->colourRepresentationString = sscanf($this->colourRepresentationString, "%02x%02x%02x");
-        return "{$this->colourRepresentationString[0]},{$this->colourRepresentationString[1]},{$this->colourRepresentationString[2]}";
+        $this->colourRepresentationString = sscanf($this->colourRepresentationString, SCAN_HEX);
+
+        $localArray = $this->getColour();
+        foreach ($localArray as &$value) {
+            $value = $this->zeroOut($value);
+        }
+
+        $this->setColour(implode(DELIMITER, $localArray));
+        return $this->getColour();
     }
 
+    /**
+     * @param $var
+     * @return mixed
+     */
+    private function zeroOut($var)
+    {
+        if (strlen($var) < MIN_RGB_SIZE) {
+            $var = 0 . $var;
+            return $this->zeroOut($var);
+        }
+
+        return $var;
+
+    }
+
+    /**
+     * @return null
+     */
     public function convertToHexString()
     {
-
         if ($this->doValidation()) {
             if (preg_match(REGEX_HEX, $this->colourRepresentationString)) {
                 return $this->colourRepresentationString;
             } else {
-                $this->setColour($this->fromRGB(explode(',', $this->getColour())));
+                $this->setColour($this->fromRGB(explode(DELIMITER, $this->getColour())));
                 return $this->getColour();
             }
         }
 
-        throw new InvalidArgumentException("Colour {$this->colourRepresentationString} is not a valid value");
+        $this->notValidColour();
     }
 
+    /**
+     * @param array $colours RGB values (1,3,94)
+     * @return string HexString value for the passed RGB colour.
+     */
     private function fromRGB(array $colours)
     {
-        $red = dechex($colours[0]);
-        $green = dechex($colours[1]);
-        $blue = dechex($colours[2]);
+        $colourString = null;
 
-        return $red . $green . $blue;
+        foreach ($colours as $value) {
+            if ($value != 0) {
+                $colourString .= dechex($value);
+                continue;
+            }
+            $colourString .= "00";
+        }
+
+        return $colourString;
     }
 }
