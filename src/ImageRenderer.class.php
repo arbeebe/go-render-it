@@ -32,10 +32,9 @@ require_once "classes/colour.class.php";
  */
 class ImageRenderer
 {
+    private $size;
     private $textString;
     private $image = null;
-    private $height = DEFAULT_HEIGHT;
-    private $width = DEFAULT_WIDTH;
     private $borderWidth = DEFAULT_BORDER;
     private $colour;
     private $showBorder = SHOW_BORDER;
@@ -49,6 +48,7 @@ class ImageRenderer
     {
         $this->textString = DEFAULT_HEIGHT . SIZE_JOINER . DEFAULT_WIDTH;
         $this->colour = new Colour(DEFAULT_FILL);
+        $this->size = new Size();
     }
 
     /**
@@ -61,7 +61,7 @@ class ImageRenderer
         $this->colour->convertToRGB();
         $coloursRGB = explode(',',$this->colour->getColour());
 
-        $this->image = imagecreate($this->width, $this->height);
+        $this->image = imagecreate($this->size->getWidth(),$this->size->getHeight());
         imagecolorallocate($this->image, $coloursRGB[0], $coloursRGB[1], $coloursRGB[2]);
 
         if ($this->showLabel) {
@@ -89,8 +89,8 @@ class ImageRenderer
         $grey = imagecolorallocate($this->image, 128, 128, 128);
 
         $font_size = 1;
-        $txt_max_width = intval(0.5 * $this->width);
-        $txt_max_height = intval(0.5 * $this->height);
+        $txt_max_width = intval(0.5 * $this->size->getWidth());
+        $txt_max_height = intval(0.5 * $this->size->getHeight());
 
         do {
             $font_size++;
@@ -104,8 +104,8 @@ class ImageRenderer
         $descent = abs($p[1]);
         $height = $ascent + $descent;
 
-        $y = (($this->height / 2) - ($height / 2)) + $ascent;
-        $x = ($this->width - $txt_width) / 2;
+        $y = (($this->size->getHeight() / 2) - ($height / 2)) + $ascent;
+        $x = ($this->size->getWidth() - $txt_width) / 2;
         imagettftext($this->image, $font_size, 0, $x, $y + 3, $grey, FONT_PATH, $this->textString);
         imagettftext($this->image, $font_size, 0, $x, $y, $color, FONT_PATH, $this->textString);
     }
@@ -117,17 +117,10 @@ class ImageRenderer
      * @param $height desired height of the image.
      * @param $width  desired width of the image.
      */
-    public function setDimensions($height, $width)
+    public function setDimensions(Size $size)
     {
-        if (!empty($height) && is_numeric($height)) {
-            if (!empty($width) && is_numeric($width)) {
-                $this->width = $width;
-                $this->height = $height;
-                $this->textString = $width . SIZE_JOINER . $height;
-            }
-        }
-
-
+       $this->size = $size;
+       $this->setTextString($this->size->getWidth() . SIZE_JOINER . $this->size->getHeight());
     }
 
     /**

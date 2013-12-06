@@ -101,7 +101,7 @@ class Colour
             $value = $this->zeroOut($value);
         }
 
-        $this->setColour(implode(DELIMITER, $localArray));
+        $this->setColour(implode(RGB_DELIMITER, $localArray));
         return $this->getColour();
     }
 
@@ -129,7 +129,7 @@ class Colour
             if (preg_match(REGEX_HEX, $this->colourRepresentationString)) {
                 return $this->colourRepresentationString;
             } else {
-                $this->setColour($this->fromRGB(explode(DELIMITER, $this->getColour())));
+                $this->setColour($this->fromRGB(explode(RGB_DELIMITER, $this->getColour())));
                 return $this->getColour();
             }
         }
@@ -154,5 +154,14 @@ class Colour
         }
 
         return $colourString;
+    }
+
+    public static function isValidRequest($value,Colour &$object){
+        if (preg_match_all(REGEX_HEX, $value, $matches) || preg_match_all(REGEX_RGB, $value, $matches)) {
+            $object = new Colour($value);
+            return true;
+        }
+
+        return false;
     }
 }

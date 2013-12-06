@@ -14,14 +14,14 @@ class SizeTest extends PHPUnit_Framework_TestCase {
 
     public function testNullConstructor(){
         $size = new Size();
-        $this->assertEquals(300,$size->getHeight());
-        $this->assertEquals(300,$size->getWidth());
+        parent::assertEquals(300,$size->getHeight());
+        parent::assertEquals(300,$size->getWidth());
     }
 
     public function testSetConstructor(){
         $size = new Size(150,250);
-        $this->assertEquals(250,$size->getWidth());
-        $this->assertEquals(150,$size->getHeight());
+        parent::assertEquals(250,$size->getWidth());
+        parent::assertEquals(150,$size->getHeight());
     }
 
     /**
@@ -48,13 +48,13 @@ class SizeTest extends PHPUnit_Framework_TestCase {
     public function testHeightSetter(){
         $size = new Size();
         $size->setHeight(500);
-        $this->assertEquals(500,$size->getHeight());
+        parent::assertEquals(500,$size->getHeight());
     }
 
     public function testWidthSetter(){
         $size = new Size();
         $size->setWidth(500);
-        $this->assertEquals(500,$size->getWidth());
+        parent::assertEquals(500,$size->getWidth());
     }
 
     /**
@@ -62,7 +62,7 @@ class SizeTest extends PHPUnit_Framework_TestCase {
      */
     public function testHeightSetterException(){
         $size = new Size();
-        $size->setHeight("500");
+        $size->setHeight("hjk500");
     }
 
     /**
@@ -71,5 +71,37 @@ class SizeTest extends PHPUnit_Framework_TestCase {
     public function testWidthSetterException(){
         $size = new Size();
         $size->setWidth("Some random string");
+    }
+
+    public function testCreateObjectWithValidStringRequest(){
+        $sizeObject = new Size();
+        $request = "1000x500";
+        parent::assertTrue(Size::isValidRequest($request,$sizeObject));
+        parent::assertEquals(1000,$sizeObject->getWidth());
+        parent::assertEquals(500,$sizeObject->getHeight());
+    }
+
+    public function testCreateObjectWithValidNumberRequest(){
+        $sizeObject = new Size();
+        $request = 700;
+        parent::assertTrue(Size::isValidRequest($request,$sizeObject));
+        parent::assertEquals(700,$sizeObject->getWidth());
+        parent::assertEquals(700,$sizeObject->getHeight());
+    }
+
+    public function testFailedCreateObjectWithValidStringRequest(){
+        $sizeObject = new Size();
+        $request = "1000jhgfx500";
+        parent::assertFalse(Size::isValidRequest($request,$sizeObject));
+        parent::assertEquals(300,$sizeObject->getWidth());
+        parent::assertEquals(300,$sizeObject->getHeight());
+    }
+
+    public function testFailedCreateObjectWithValidNumberRequest(){
+        $sizeObject = new Size();
+        $request = "700asdasd";
+        parent::assertFalse(Size::isValidRequest($request,$sizeObject));
+        parent::assertEquals(300,$sizeObject->getWidth());
+        parent::assertEquals(300,$sizeObject->getHeight());
     }
 }

@@ -23,23 +23,24 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 require_once "constants/ImageRenderer.constants.php";
-require_once "constants/colour.constants.php";
 require_once "ImageRenderer.class.php";
 require_once "classes/colour.class.php";
+require_once "classes/size.class.php";
+require_once "constants/ImageRequestRegex.constants.php";
 
 class ImageRequestHandler
 {
 
     private $colour;
     private $imageObject;
-    private $height;
-    private $width;
     private $label;
     private $request;
+    private $size;
 
     function __construct($requestString = false)
     {
         $this->colour = new Colour();
+        $this->size = new Size();
         $this->setRequestString($requestString);
     }
 
@@ -51,9 +52,8 @@ class ImageRequestHandler
     public function render()
     {
         $this->processRequest();
-
         $this->imageObject = new ImageRenderer();
-        $this->imageObject->setDimensions($this->height, $this->width);
+        $this->imageObject->setDimensions($this->size);
         $this->imageObject->setColour($this->colour);
 
         if (!empty($this->label)) {
@@ -67,23 +67,9 @@ class ImageRequestHandler
     {
         foreach ($this->request as $value) {
 
-            if (preg_match_all(REGEX_HEX, $value, $matches) || preg_match_all(REGEX_RGB, $value, $matches)) {
-                $this->colour = new Colour($value);
-                continue;
-            }
+            Colour::isValidRequest($value,$this->colour);
 
-            if (preg_match_all(REGEX_SIZE_STRING, $value, $matches) || preg_match_all(REGEX_SIZE, $value, $matches)) {
-                if (preg_match_all(REGEX_SIZE_STRING, $value, $matches)) {
-                    $value = explode(SIZE_JOINER, strtolower($value));
-                    $this->width = $value[0];
-                    $this->height = $value[1];
-                } else {
-                    $this->height = $value;
-                    $this->width = $value;
-                }
-
-                continue;
-            }
+            Size::isValidRequest($value,$this->size);
 
             if (preg_match_all(LABEL_REGEX, $value, $matches)) {
                 $this->label = str_replace(LABEL_ID, EMPTY_STRING, $value);

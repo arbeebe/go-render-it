@@ -16,8 +16,7 @@ class ColourTest extends PHPUnit_Framework_TestCase
     {
         $colourString = "DDDAFA";
         $colour = new Colour($colourString);
-        assert($colour->getColour() == $colourString);
-        assert($colour != null);
+        parent::assertEquals($colour->getColour() , $colourString);
     }
 
     public function testSetColour()
@@ -25,7 +24,7 @@ class ColourTest extends PHPUnit_Framework_TestCase
         $colour = new Colour();
         $colourString = "DDDAFA";
         $colour->setColour($colourString);
-        assert($colour->getColour() == $colourString);
+        parent::assertEquals($colour->getColour() , $colourString);
     }
 
     public function testColourHexValidation()
@@ -33,7 +32,7 @@ class ColourTest extends PHPUnit_Framework_TestCase
         $colour = new Colour();
         $colourString = "DDDAFA";
         $colour->setColour($colourString);
-        assert($colour->isValid());
+        parent::assertTrue($colour->isValid());
     }
 
     /**
@@ -64,7 +63,7 @@ class ColourTest extends PHPUnit_Framework_TestCase
         $colour = new Colour();
         $colourString = "DDDAFA";
         $colour->setColour($colourString);
-        assert($colour->convertToHexString() == $colourString);
+        parent::assertEquals($colour->convertToHexString() , $colourString);
     }
 
     public function testConvertFromRGBToHEx()
@@ -72,8 +71,8 @@ class ColourTest extends PHPUnit_Framework_TestCase
         $colour = new Colour();
         $colourString = "123,223,100";
         $colour->setColour($colourString);
-        assert("7bdf64" == $colour->convertToHexString());
-        assert("7bdf64" == $colour->getColour());
+        parent::assertEquals("7bdf64" , $colour->convertToHexString());
+        parent::assertEquals("7bdf64" , $colour->getColour());
     }
 
     public function testConvertHexToRGB()
@@ -81,15 +80,29 @@ class ColourTest extends PHPUnit_Framework_TestCase
         $colour = new Colour();
         $colourString = "ff9900";
         $colour->setColour($colourString);
-        assert("255,153,000" == $colour->convertToRGB());
+        parent::assertEquals("255,153,000" , $colour->convertToRGB());
     }
 
     public function testAll(){
         $colour = new Colour();
         $colourString = "ff9900";
         $colour->setColour($colourString);
-        assert("255,153,000" == $colour->convertToRGB());
+        parent::assertEquals("255,153,000" , $colour->convertToRGB());
         $colour->convertToHexString();
-        assert($colour->getColour() == $colourString);
+        parent::assertEquals($colour->getColour() , $colourString);
+    }
+
+    public function testIsValidRequestHEX(){
+        $colour = new Colour();
+        $request = "FFDAFF";
+        parent::assertTrue(Colour::isValidRequest($request,$colour));
+        parent::assertEquals($request,$colour->getColour());
+    }
+
+    public function testIsValidRequestRGB(){
+        $colour = new Colour();
+        $request = "123,222,110";
+        parent::assertTrue(Colour::isValidRequest($request,$colour));
+        parent::assertEquals($request,$colour->getColour());
     }
 }

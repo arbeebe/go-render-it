@@ -29,8 +29,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * setting of the class fields used to render the image fail due to not being valid.
  */
 
-define("DEFAULT_WIDTH", 300);
-define("DEFAULT_HEIGHT", DEFAULT_WIDTH);
+
 define("DEFAULT_BORDER", 4);
 define("DEFAULT_FILL", "DCDADA");
 define("DELIMITER", ",");
