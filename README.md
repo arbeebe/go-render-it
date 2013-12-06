@@ -1,4 +1,3 @@
-placeholder-renderer
-====================
+Go Render It
+======================
 
-Simple Script to generate an image, with passed parameters.
