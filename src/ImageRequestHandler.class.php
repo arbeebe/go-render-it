@@ -27,6 +27,7 @@ require_once "ImageRenderer.class.php";
 require_once "classes/colour.class.php";
 require_once "classes/size.class.php";
 require_once "constants/ImageRequestRegex.constants.php";
+require_once "classes/formats/format.class.php";
 
 class ImageRequestHandler
 {
@@ -36,11 +37,13 @@ class ImageRequestHandler
     private $label;
     private $request;
     private $size;
+    private $format;
 
     function __construct($requestString = false)
     {
         $this->colour = new Colour();
         $this->size = new Size();
+        $this->format = new PNG();
         $this->setRequestString($requestString);
     }
 
@@ -55,6 +58,7 @@ class ImageRequestHandler
         $this->imageObject = new ImageRenderer();
         $this->imageObject->setDimensions($this->size);
         $this->imageObject->setColour($this->colour);
+        $this->imageObject->setFormat($this->format);
 
         if (!empty($this->label)) {
             $this->imageObject->setTextString($this->label);
@@ -68,8 +72,8 @@ class ImageRequestHandler
         foreach ($this->request as $value) {
 
             Colour::isValidRequest($value,$this->colour);
-
             Size::isValidRequest($value,$this->size);
+            AbstractFormat::resolveFormat($value,$this->format);
 
             if (preg_match_all(LABEL_REGEX, $value, $matches)) {
                 $this->label = str_replace(LABEL_ID, EMPTY_STRING, $value);

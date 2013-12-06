@@ -25,6 +25,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 require_once "constants/ImageRenderer.constants.php";
 require_once "classes/colour.class.php";
+require_once "classes/formats/png.class.php";
+require_once "classes/formats/jpg.class.php";
+require_once "classes/formats/gif.class.php";
 
 /**
  * Class ImageRenderer will render an image from passed
@@ -39,6 +42,8 @@ class ImageRenderer
     private $colour;
     private $showBorder = SHOW_BORDER;
     private $showLabel = SHOW_LABEL;
+
+    private $format;
 
     /**
      * Default constructor generates a default label to be placed on
@@ -67,7 +72,8 @@ class ImageRenderer
         if ($this->showLabel) {
             $this->renderText();
         }
-        header(CONTENT_TYPE);
+
+        header($this->format->getFormatHeader());
 
 
         if ($this->showBorder) {
@@ -76,7 +82,8 @@ class ImageRenderer
             imagerectangle($this->image, 0, 0, ImageSX($this->image), ImageSY($this->image), $black);
         }
 
-        imagepng($this->image);
+        $this->format->create($this->image);
+
         imagedestroy($this->image);
     }
 
@@ -170,6 +177,11 @@ class ImageRenderer
     public function setTextString($textString)
     {
         $this->textString = $textString;
+    }
+
+    public function setFormat($format)
+    {
+        $this->format = $format;
     }
 
 }
