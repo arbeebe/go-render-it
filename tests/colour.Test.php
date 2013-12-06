@@ -105,4 +105,13 @@ class ColourTest extends PHPUnit_Framework_TestCase
         parent::assertTrue(Colour::isValidRequest($request,$colour));
         parent::assertEquals($request,$colour->getColour());
     }
+
+    public function testConvertFromRGBToHExBlack()
+    {
+        $colour = new Colour();
+        $colourString = "0,0,0";
+        $colour->setColour($colourString);
+        parent::assertEquals("000000" , $colour->convertToHexString());
+        parent::assertEquals("000000" , $colour->getColour());
+    }
 }
