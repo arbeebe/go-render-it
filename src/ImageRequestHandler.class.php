@@ -40,7 +40,7 @@ class ImageRequestHandler
     function __construct($requestString = false)
     {
         $this->colour = new Colour();
-        $this->request = explode(URL_DELIMITER, $requestString);
+        $this->setRequestString($requestString);
     }
 
     public function setRequestString($requestString)
