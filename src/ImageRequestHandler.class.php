@@ -23,8 +23,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 require_once "constants/ImageRenderer.constants.php";
-require_once "constants/ImageRequestRegex.constants.php";
+require_once "constants/colour.constants.php";
 require_once "ImageRenderer.class.php";
+require_once "classes/colour.class.php";
 
 class ImageRequestHandler
 {
@@ -38,6 +39,7 @@ class ImageRequestHandler
 
     function __construct($requestString = false)
     {
+        $this->colour = new Colour();
         $this->request = explode(URL_DELIMITER, $requestString);
     }
 
@@ -66,7 +68,7 @@ class ImageRequestHandler
         foreach ($this->request as $value) {
 
             if (preg_match_all(REGEX_HEX, $value, $matches) || preg_match_all(REGEX_RGB, $value, $matches)) {
-                $this->colour = $value;
+                $this->colour = new Colour($value);
                 continue;
             }
 

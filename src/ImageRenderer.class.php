@@ -24,6 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 require_once "constants/ImageRenderer.constants.php";
+require_once "classes/colour.class.php";
 
 /**
  * Class ImageRenderer will render an image from passed
@@ -36,7 +37,7 @@ class ImageRenderer
     private $height = DEFAULT_HEIGHT;
     private $width = DEFAULT_WIDTH;
     private $borderWidth = DEFAULT_BORDER;
-    private $colour = DEFAULT_FILL;
+    private $colour;
     private $showBorder = SHOW_BORDER;
     private $showLabel = SHOW_LABEL;
 
@@ -47,6 +48,7 @@ class ImageRenderer
     function __construct()
     {
         $this->textString = DEFAULT_HEIGHT . SIZE_JOINER . DEFAULT_WIDTH;
+        $this->colour = new Colour(DEFAULT_FILL);
     }
 
     /**
@@ -55,11 +57,9 @@ class ImageRenderer
      */
     public function render()
     {
-        if (is_array($this->colour)) {
-            $coloursRGB = $this->colour;
-        } else {
-            $coloursRGB = $this->hexStringToRGB($this->colour);
-        }
+
+        $this->colour->convertToRGB();
+        $coloursRGB = explode(',',$this->colour->getColour());
 
         $this->image = imagecreate($this->width, $this->height);
         imagecolorallocate($this->image, $coloursRGB[0], $coloursRGB[1], $coloursRGB[2]);
@@ -67,8 +67,8 @@ class ImageRenderer
         if ($this->showLabel) {
             $this->renderText();
         }
-
         header(CONTENT_TYPE);
+
 
         if ($this->showBorder) {
             $black = imagecolorallocate($this->image, 0, 0, 0);
@@ -78,27 +78,6 @@ class ImageRenderer
 
         imagepng($this->image);
         imagedestroy($this->image);
-    }
-
-    /**
-     * Method converts a hex colour representation string to an rgb array.
-     *
-     * @param $hexString "FFAEDEF"
-     * @return array array(123,100,50)
-     */
-    private function hexStringToRGB($hexString)
-    {
-        if (strlen($hexString) == 3) {
-            $red = hexdec(substr($hexString, 0, 1) . substr($hexString, 0, 1));
-            $green = hexdec(substr($hexString, 1, 1) . substr($hexString, 1, 1));
-            $blue = hexdec(substr($hexString, 2, 1) . substr($hexString, 2, 1));
-        } else {
-            $red = hexdec(substr($hexString, 0, 2));
-            $green = hexdec(substr($hexString, 2, 2));
-            $blue = hexdec(substr($hexString, 4, 2));
-        }
-        $rgb = array($red, $green, $blue);
-        return $rgb;
     }
 
     /**
@@ -160,27 +139,11 @@ class ImageRenderer
      *
      * @param $colour "FFFAEA2"
      */
-    public function setColour($colour)
+    public function setColour(Colour $colour)
     {
-        if (!empty($colour)) {
-            if (strlen($colour) == HEX_LENGTH) {
-                $this->colour = $colour;
-            } else {
-                if (strpos($colour, DELIMITER)) {
-                    $coloursRGB = explode(DELIMITER, $colour);
-                    if (count($coloursRGB) != RGB_COUNT) {
-                        $this->colour = DEFAULT_FILL;
-                    } else {
-                        $this->colour = $coloursRGB;
-                    }
-                } else {
-                    $this->colour = DEFAULT_FILL;
-                }
-            }
-        } else {
-            $this->colour = DEFAULT_FILL;
+        if($colour->isValid()){
+            $this->colour = $colour;
         }
-
     }
 
     /**
