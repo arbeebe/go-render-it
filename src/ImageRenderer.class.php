@@ -28,6 +28,8 @@ require_once "classes/colour.class.php";
 require_once "classes/formats/png.class.php";
 require_once "classes/formats/jpg.class.php";
 require_once "classes/formats/gif.class.php";
+require_once "classes/shapes/square.class.php";
+require_once "classes/shapes/circle.class.php";
 
 /**
  * Class ImageRenderer will render an image from passed
@@ -42,6 +44,7 @@ class ImageRenderer
     private $showBorder = SHOW_BORDER;
     private $label;
     private $format;
+    private $shape;
 
     function __construct()
     {
@@ -49,19 +52,20 @@ class ImageRenderer
         $this->colour = new Colour(DEFAULT_FILL);
         $this->size = new Size();
         $this->format = new PNG();
+        $this->shape = new Square();
     }
 
     public function render()
     {
 
-        $this->colour->convertToRGB();
-        $coloursRGB = explode(',',$this->colour->getColour());
+
 
         $this->image = imagecreate($this->size->getWidth(),$this->size->getHeight());
-        imagecolorallocate($this->image, $coloursRGB[0], $coloursRGB[1], $coloursRGB[2]);
 
+        $this->shape->createShape($this);
         $this->label->renderText($this);
         header($this->format->getFormatHeader());
+
 
 
         if ($this->showBorder) {
@@ -112,6 +116,15 @@ class ImageRenderer
     public function setFormat($format)
     {
         $this->format = $format;
+    }
+
+    public function getColour()
+    {
+        return $this->colour;
+    }
+
+    public function setShape(AbstractShape $shape){
+        $this->shape = $shape;
     }
 
 }
