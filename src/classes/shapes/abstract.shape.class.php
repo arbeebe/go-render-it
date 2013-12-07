@@ -32,7 +32,5 @@ abstract class AbstractShape implements Shape
     {
         if ($value == "circle")
             $shapeObject = new Circle();
-        else
-            $shapeObject = new Square();
     }
 }
