@@ -24,8 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 require_once "ImageRequestHandler.class.php";
 
-$imageRequestObject = new ImageRequestHandler();
-$imageRequestObject->setRequestString($_GET[GET_PARAM]);
+$imageRequestObject = new ImageRequestHandler($_GET[GET_PARAM]);
 $imageRequestObject->render();
 
 ?>

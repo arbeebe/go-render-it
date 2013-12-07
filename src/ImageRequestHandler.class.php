@@ -22,12 +22,11 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once "constants/ImageRenderer.constants.php";
 require_once "ImageRenderer.class.php";
 require_once "classes/colour.class.php";
 require_once "classes/size.class.php";
-require_once "constants/ImageRequestRegex.constants.php";
 require_once "classes/formats/format.class.php";
+require_once "classes/label.class.php";
 
 class ImageRequestHandler
 {
@@ -44,12 +43,13 @@ class ImageRequestHandler
         $this->colour = new Colour();
         $this->size = new Size();
         $this->format = new PNG();
+        $this->label = new Label();
         $this->setRequestString($requestString);
     }
 
-    public function setRequestString($requestString)
+    private function setRequestString($requestString)
     {
-        $this->request = explode(URL_DELIMITER, $requestString);
+        $this->request = explode("/", $requestString);
     }
 
     public function render()
@@ -60,10 +60,10 @@ class ImageRequestHandler
         $this->imageObject->setColour($this->colour);
         $this->imageObject->setFormat($this->format);
 
-        if (!empty($this->label)) {
-            $this->imageObject->setTextString($this->label);
-        }
+        if($this->label->getLabelText() == "")
+            $this->label->createLabelTextFromSize($this->size);
 
+        $this->imageObject->setText($this->label);
         $this->imageObject->render();
     }
 
@@ -74,11 +74,8 @@ class ImageRequestHandler
             Colour::isValidRequest($value,$this->colour);
             Size::isValidRequest($value,$this->size);
             AbstractFormat::resolveFormat($value,$this->format);
+            Label::isValidRequest($value,$this->label);
 
-            if (preg_match_all(LABEL_REGEX, $value, $matches)) {
-                $this->label = str_replace(LABEL_ID, EMPTY_STRING, $value);
-                continue;
-            }
         }
     }
 }
