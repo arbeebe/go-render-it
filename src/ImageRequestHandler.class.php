@@ -28,6 +28,7 @@ require_once "classes/size.class.php";
 require_once "classes/formats/format.class.php";
 require_once "classes/label.class.php";
 require_once "classes/shapes/square.class.php";
+require_once "classes/border.class.php";
 
 
 class ImageRequestHandler
@@ -39,6 +40,7 @@ class ImageRequestHandler
     private $request;
     private $size;
     private $format;
+    private $border;
 
     function __construct($requestString = false)
     {
@@ -47,6 +49,7 @@ class ImageRequestHandler
         $this->format = new PNG();
         $this->label = new Label();
         $this->shape = new Square();
+        $this->border = new Border();
         $this->setRequestString($requestString);
     }
 
@@ -68,6 +71,7 @@ class ImageRequestHandler
             $this->label->createLabelTextFromSize($this->size);
 
         $this->imageObject->setText($this->label);
+        $this->imageObject->setBorder($this->border);
         $this->imageObject->render();
     }
 
@@ -80,6 +84,7 @@ class ImageRequestHandler
             AbstractFormat::resolveFormat($value, $this->format);
             Label::isValidRequest($value, $this->label);
             AbstractShape::resolveShape($value, $this->shape);
+            Border::isValidBorderRequest($value,$this->border);
 
         }
     }

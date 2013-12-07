@@ -30,6 +30,7 @@ require_once "classes/formats/jpg.class.php";
 require_once "classes/formats/gif.class.php";
 require_once "classes/shapes/square.class.php";
 require_once "classes/shapes/circle.class.php";
+require_once "classes/border.class.php";
 
 /**
  * Class ImageRenderer will render an image from passed
@@ -39,12 +40,11 @@ class ImageRenderer
 {
     private $size;
     private $image = null;
-    private $borderWidth = DEFAULT_BORDER;
     private $colour;
-    private $showBorder = SHOW_BORDER;
     private $label;
     private $format;
     private $shape;
+    private $borderObject;
 
     function __construct()
     {
@@ -53,24 +53,23 @@ class ImageRenderer
         $this->size = new Size();
         $this->format = new PNG();
         $this->shape = new Square();
+        $this->borderObject = new Border();
     }
 
     public function render()
     {
 
+        if($this->borderObject->isVisible()){
+            $this->image = imagecreate($this->size->getWidth()+$this->borderObject->getThickness(),
+                $this->size->getHeight()+$this->borderObject->getThickness());
+        } else {
+            $this->image = imagecreate($this->size->getWidth(), $this->size->getHeight());
+        }
 
-        $this->image = imagecreate($this->size->getWidth(), $this->size->getHeight());
 
         $this->shape->createShape($this);
         $this->label->renderText($this);
         header($this->format->getFormatHeader());
-
-
-        if ($this->showBorder) {
-            $black = imagecolorallocate($this->image, 0, 0, 0);
-            imagesetthickness($this->image, $this->borderWidth);
-            imagerectangle($this->image, 0, 0, ImageSX($this->image), ImageSY($this->image), $black);
-        }
 
         $this->format->create($this->image);
 
@@ -94,10 +93,13 @@ class ImageRenderer
         }
     }
 
-    public function setBorder($border, $borderWidth)
+    public function setBorder(Border $borderObject)
     {
-        $this->borderWidth = $borderWidth;
-        $this->showBorder = $border;
+       $this->borderObject = $borderObject;
+    }
+
+    public function getBorder(){
+        return $this->borderObject;
     }
 
     public function getSize()

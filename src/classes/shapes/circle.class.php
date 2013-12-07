@@ -34,11 +34,23 @@ class Circle extends AbstractShape
         $colour->convertToRGB();
         $coloursRGB = explode(',', $colour->getColour());
         $white = imagecolorallocate($imageRenderObject->getResource(), 255, 255, 255);
+
+        $border = $imageRenderObject->getBorder();
+        if($border->isVisible()){
+            $black = imagecolorallocate($imageRenderObject->getResource(), 0, 0, 0);
+
+            imagefilledellipse($imageRenderObject->getResource(), ImageSX($imageRenderObject->getResource())/2,
+                ImageSY($imageRenderObject->getResource())/2, ($imageRenderObject->getSize()->getWidth() - 5) + $border->getThickness(),
+                ($imageRenderObject->getSize()->getHeight() - 5) + $border->getThickness(), $black);
+        }
+
         $colourCreated = imagecolorallocate($imageRenderObject->getResource(), $coloursRGB[0], $coloursRGB[1], $coloursRGB[2]);
         imagecolortransparent($imageRenderObject->getResource(), $white);
-        imagefilledellipse($imageRenderObject->getResource(), $imageRenderObject->getSize()->getWidth() / 2,
-            $imageRenderObject->getSize()->getHeight() / 2, $imageRenderObject->getSize()->getWidth() - 5,
+        imagefilledellipse($imageRenderObject->getResource(), ImageSX($imageRenderObject->getResource())/2,
+            ImageSY($imageRenderObject->getResource())/2, $imageRenderObject->getSize()->getWidth() - 5,
             $imageRenderObject->getSize()->getHeight() - 5, $colourCreated);
+
+
     }
 }
 

@@ -68,8 +68,8 @@ class Label
         $grey = imagecolorallocate($imageObject->getResource(), 128, 128, 128);
 
         $font_size = 1;
-        $txt_max_width = intval(0.5 * $imageObject->getSize()->getWidth());
-        $txt_max_height = intval(0.5 * $imageObject->getSize()->getHeight());
+        $txt_max_width = intval(0.5 * (ImageSX($imageObject->getResource()) + $imageObject->getBorder()->getThickness()));
+        $txt_max_height = intval(0.5 * (ImageSY($imageObject->getResource()) + $imageObject->getBorder()->getThickness()));
 
         do {
             $font_size++;
@@ -83,8 +83,8 @@ class Label
         $descent = abs($p[1]);
         $height = $ascent + $descent;
 
-        $y = (($imageObject->getSize()->getHeight() / 2) - ($height / 2)) + $ascent;
-        $x = ($imageObject->getSize()->getWidth() - $txt_width) / 2;
+        $y = (((ImageSX($imageObject->getResource()) + $imageObject->getBorder()->getThickness()) / 2) - ($height / 2)) + $ascent;
+        $x = ((ImageSX($imageObject->getResource()) + $imageObject->getBorder()->getThickness()) - $txt_width) / 2;
         imagettftext($imageObject->getResource(), $font_size, 0, $x, $y + 3, $grey, FONT_PATH, $this->getLabelText());
         imagettftext($imageObject->getResource(), $font_size, 0, $x, $y, $color, FONT_PATH, $this->getLabelText());
     }

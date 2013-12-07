@@ -34,6 +34,14 @@ class Square extends AbstractShape
         $colour->convertToRGB();
         $coloursRGB = explode(',', $colour->getColour());
         imagecolorallocate($imageRenderObject->getResource(), $coloursRGB[0], $coloursRGB[1], $coloursRGB[2]);
+
+        $border = $imageRenderObject->getBorder();
+        if($border->isVisible()){
+            $black = imagecolorallocate($imageRenderObject->getResource(), 0, 0, 0);
+            imagesetthickness($imageRenderObject->getResource(), $border->getThickness());
+            imagerectangle($imageRenderObject->getResource(), 0, 0, ImageSX($imageRenderObject->getResource()), ImageSY($imageRenderObject->getResource()), $black);
+        }
+
     }
 
 }
