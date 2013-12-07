@@ -23,7 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 
-require_once __DIR__ . "/colour.class.php";
+require_once dirname(__FILE__) . "/colour.class.php";
 
 class Border{
     private $colour;

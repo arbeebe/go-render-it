@@ -23,7 +23,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once __DIR__ . "/format.class.php";
+require_once dirname(__FILE__) . "/format.class.php";
 
 
 class GIF extends AbstractFormat

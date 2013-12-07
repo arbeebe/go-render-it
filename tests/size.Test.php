@@ -23,7 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 
-require_once __DIR__ . '/../src/classes/size.class.php';
+require_once dirname(__FILE__) . '/../src/classes/size.class.php';
 
 class SizeTest extends PHPUnit_Framework_TestCase
 {
