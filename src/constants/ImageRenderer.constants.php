@@ -24,12 +24,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 
-/**
- * Constants used within the ImageRenderer Class, these are used as the defaults, in case the
- * setting of the class fields used to render the image fail due to not being valid.
- */
-
-
 define("DEFAULT_BORDER", 4);
 define("DEFAULT_FILL", "DCDADA");
 define("DELIMITER", ",");
@@ -40,8 +34,7 @@ define("SHOW_BORDER", false);
 define("FONT_PATH", 'fonts/monofont.ttf');
 
 
-
-define("SIZE_JOINER","x");
-define("GET_PARAM",'url');
+define("SIZE_JOINER", "x");
+define("GET_PARAM", 'url');
 
 ?>

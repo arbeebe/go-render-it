@@ -24,7 +24,7 @@
 body, html {
     margin: 0;
     font-family: Tahoma, Geneva, sans-serif;
-    font-size:15px;
+    font-size: 15px;
     background-color: #EEEEEE;
     padding: 0;
 }
@@ -43,21 +43,22 @@ body, html {
     background-color: #0075B2;
 }
 
-#header img{
-    float:left;
+#header img {
+    float: left;
     width: 100px;
 }
+
 #header h1 {
-    float:left;
+    float: left;
     margin-left: 20px;
     color: #FFFFFF;
 }
 
 #header h4 {
-    float:left;
+    float: left;
     position: relative;
-    top:40px;
-    left:-194px;
+    top: 40px;
+    left: -194px;
     color: #FDA432;
 }
 
@@ -215,12 +216,12 @@ h3 {
 
 .rightLinkImg {
     position: relative;
-    left:-6px;
+    left: -6px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-.center{
+.center {
     position: relative;
-    left:50px;
+    left: 50px;
 }

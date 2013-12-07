@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     $("li").hover(function () {
         $(this).css("background-color", "#FDA432");
-        $(this).css("color","#0075B2");
+        $(this).css("color", "#0075B2");
     });
 
     $("li").click(function () {
@@ -43,7 +43,7 @@ $(document).ready(function () {
 
     $("li").mouseout(function () {
         $(this).css("background-color", "#DCDADA");
-        $(this).css("color","#FFFFFF");
+        $(this).css("color", "#FFFFFF");
         $(divNam).fadeOut("fast", function () {
             $("#rightContent").children().hide();
             $("#imageContainer").fadeIn("fast", function () {

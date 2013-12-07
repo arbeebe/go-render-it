@@ -48,7 +48,7 @@ class ImageRenderer
 
     function __construct()
     {
-        $this->label = new Label(DEFAULT_WIDTH .SIZE_JOINER .DEFAULT_HEIGHT );
+        $this->label = new Label(DEFAULT_WIDTH . SIZE_JOINER . DEFAULT_HEIGHT);
         $this->colour = new Colour(DEFAULT_FILL);
         $this->size = new Size();
         $this->format = new PNG();
@@ -59,13 +59,11 @@ class ImageRenderer
     {
 
 
-
-        $this->image = imagecreate($this->size->getWidth(),$this->size->getHeight());
+        $this->image = imagecreate($this->size->getWidth(), $this->size->getHeight());
 
         $this->shape->createShape($this);
         $this->label->renderText($this);
         header($this->format->getFormatHeader());
-
 
 
         if ($this->showBorder) {
@@ -86,12 +84,12 @@ class ImageRenderer
 
     public function setDimensions(Size $size)
     {
-       $this->size = $size;
+        $this->size = $size;
     }
 
     public function setColour(Colour $colour)
     {
-        if($colour->isValid()){
+        if ($colour->isValid()) {
             $this->colour = $colour;
         }
     }
@@ -102,10 +100,10 @@ class ImageRenderer
         $this->showBorder = $border;
     }
 
-    public function getSize(){
+    public function getSize()
+    {
         return $this->size;
     }
-
 
 
     public function setText(Label $labelObject)
@@ -123,7 +121,8 @@ class ImageRenderer
         return $this->colour;
     }
 
-    public function setShape(AbstractShape $shape){
+    public function setShape(AbstractShape $shape)
+    {
         $this->shape = $shape;
     }
 

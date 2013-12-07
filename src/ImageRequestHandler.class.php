@@ -64,7 +64,7 @@ class ImageRequestHandler
         $this->imageObject->setFormat($this->format);
         $this->imageObject->setShape($this->shape);
 
-        if($this->label->getLabelText() == "")
+        if ($this->label->getLabelText() == "")
             $this->label->createLabelTextFromSize($this->size);
 
         $this->imageObject->setText($this->label);
@@ -75,11 +75,11 @@ class ImageRequestHandler
     {
         foreach ($this->request as $value) {
 
-            Colour::isValidRequest($value,$this->colour);
-            Size::isValidRequest($value,$this->size);
-            AbstractFormat::resolveFormat($value,$this->format);
-            Label::isValidRequest($value,$this->label);
-            AbstractShape::resolveShape($value,$this->shape);
+            Colour::isValidRequest($value, $this->colour);
+            Size::isValidRequest($value, $this->size);
+            AbstractFormat::resolveFormat($value, $this->format);
+            Label::isValidRequest($value, $this->label);
+            AbstractShape::resolveShape($value, $this->shape);
 
         }
     }
