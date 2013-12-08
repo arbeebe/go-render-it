@@ -65,7 +65,7 @@ body, html {
 #content {
     position: relative;
     overflow: hidden;
-    min-height: 400px;
+    min-height: 470px;
 }
 
 #leftContent {
@@ -135,7 +135,8 @@ body, html {
 
 #options {
     position: relative;
-    overflow: auto;
+    overflow: hidden;
+    min-height: 70px;
 }
 
 #otherOptions {
@@ -179,7 +180,7 @@ body, html {
     width: 350px;
     display: none;
     border-left: #FDA432 solid 3px;
-    height: 375px;
+    height: 450px;
     padding-left: 10px;
     margin-top: 10px;
     text-align: justify;
@@ -192,7 +193,6 @@ h3 {
 
 #mainLink {
     position: absolute;
-    bottom: 17px;
     width: 400px;
 }
 
