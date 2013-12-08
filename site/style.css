@@ -193,6 +193,7 @@ h3 {
 
 #mainLink {
     position: absolute;
+    bottom: 5;
     width: 400px;
 }
 
